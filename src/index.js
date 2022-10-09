@@ -1099,21 +1099,40 @@
 // const root = ReactDOM.createRoot(document.getElementById("root"));
 // root.render(<Home />);
 
-import ReactDOM from "react-dom/client";
-import useFetch from "./useFetch";
+// import ReactDOM from "react-dom/client";
+// import useFetch from "./useFetch";
 
-const Home = () => {
-  const [data] = useFetch("https://jsonplaceholder.typicode.com/todos");
+// const Home = () => {
+//   const [data] = useFetch("https://jsonplaceholder.typicode.com/todos");
 
-  return (
-    <>
-      {data &&
-        data.map((item) => {
-          return <p key={item.id}>{item.title}</p>;
-        })}
-    </>
-  );
-};
+//   return (
+//     <>
+//       {data &&
+//         data.map((item) => {
+//           return <p key={item.id}>{item.title}</p>;
+//         })}
+//     </>
+//   );
+// };
 
-const root = ReactDOM.createRoot(document.getElementById("root"));
-root.render(<Home />);
+// const root = ReactDOM.createRoot(document.getElementById("root"));
+// root.render(<Home />);
+
+import React from "react";
+import { render } from "react-dom";
+import { Provider } from "react-redux";
+import { createStore } from "redux";
+import reducer from "../src/reducer/index";
+import App from "../src/App";
+import "./index.css";
+
+const store = createStore(
+  reducer,
+  window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
+);
+render(
+  <Provider store={store}>
+    <App />
+  </Provider>,
+  document.getElementById("root")
+);
